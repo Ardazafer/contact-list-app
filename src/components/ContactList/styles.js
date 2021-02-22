@@ -47,4 +47,21 @@ export default StyleSheet.create({
     fontSize: 13,
     color: 'rgba(0,0,0,0.5)',
   },
+  emptyContainer: {
+    backgroundColor: '#fff',
+  },
+  innerEmptyContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 20,
+    padding: 20,
+    backgroundColor: Colors.disabledColor,
+    borderRadius: 20,
+  },
+  emptyText: {
+    textAlign: 'center',
+    fontSize: 20,
+    color: Colors.disabledTextColor,
+  },
+  emptyTextContainer: {flex: 1},
 });

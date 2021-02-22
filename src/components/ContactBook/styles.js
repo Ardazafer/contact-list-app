@@ -9,7 +9,7 @@ export default StyleSheet.create({
   contactButton: {
     backgroundColor: Colors.mainColor,
   },
-  selectedNumberText: {color: Colors.disabledTextColor},
+  selectedNumberText: {color: Colors.disabledTextColor, fontSize: 20},
   selectedNumberContainer: {
     marginTop: 10,
   },

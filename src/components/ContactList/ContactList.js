@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import ContactListItem from './ContactListItem';
 import {SELECT_CONTACT} from '../../redux/ContactReducer';
 import ContactListHeader from './ContactListHeader';
+import ContactListEmptyComponent from './ContactListEmptyComponent';
 import styles from './styles';
 
 const ContactList = ({contacts}) => {
@@ -30,6 +31,7 @@ const ContactList = ({contacts}) => {
     <FlatList
       contentContainerStyle={styles.contentContainer}
       ListHeaderComponent={<ContactListHeader contactCount={contacts.length} />}
+      ListEmptyComponent={<ContactListEmptyComponent />}
       data={contacts}
       renderItem={renderContacts}
       keyExtractor={(contact, _) => contact.recordID}

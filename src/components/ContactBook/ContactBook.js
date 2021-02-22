@@ -15,12 +15,11 @@ const ContactBook = () => {
   const [
     contacts,
     isPermissionGranted,
+    isPendingRequest,
     requestPermissionAndGetContacts,
   ] = useContactLoader(navigation);
 
-  const disableButtonCondition = !contacts.length && isPermissionGranted;
-
-  const buttonTitle = disableButtonCondition
+  const buttonTitle = isPendingRequest
     ? 'Getting contact information'
     : 'Open Contact List';
 
@@ -41,7 +40,7 @@ const ContactBook = () => {
       <CustomButton
         style={styles.contactButton}
         title={buttonTitle}
-        disabled={disableButtonCondition}
+        disabled={isPendingRequest}
         onPress={onContactButtonPressed}
       />
       {selectedNumber && <RenderSelectedNumber {...{selectedNumber}} />}

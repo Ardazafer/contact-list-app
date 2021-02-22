@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
-  container: {borderRadius: 20, overflow: 'hidden'},
-  button: {paddingVertical: 5, paddingHorizontal: 10},
+  container: {borderRadius: 30, overflow: 'hidden'},
+  button: {paddingVertical: 10, paddingHorizontal: 15},
   titleText: {
     color: '#fff',
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 'bold',
   },
 });
