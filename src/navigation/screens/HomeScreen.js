@@ -38,6 +38,7 @@ const HomeScreen = ({navigation}) => {
 
   const loadContacts = async (shouldNavigateToContactList) => {
     const _contacts = await Contacts.getAll();
+    _contacts.sort((a, b) => (a.givenName < b.givenName ? -1 : 1));
     setContacts(_contacts);
     shouldNavigateToContactList &&
       navigate('ContactList', {contacts: _contacts});
