@@ -6,7 +6,6 @@ export default StyleSheet.create({
     width: ProfilePhotoSize,
     height: ProfilePhotoSize,
     borderRadius: ProfilePhotoBordeRadius,
-    marginRight: ProfilePhotoBordeRadius,
     justifyContent: 'center',
     alignItems: 'center',
   },
