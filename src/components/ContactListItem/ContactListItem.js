@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import styles from './style';
+import styles from './styles';
 import getInitials from '../../utils/getInitials';
 import ProfilePicture from '../ProfilePicture';
 
@@ -9,6 +9,7 @@ export default class ContactListItem extends React.PureComponent {
     const {contact, onItemPress} = this.props;
     const {
       givenName,
+      middleName,
       familyName,
       phoneNumbers,
       hasThumbnail,
@@ -16,13 +17,15 @@ export default class ContactListItem extends React.PureComponent {
     } = contact;
     const {container, numberText} = styles;
 
-    const fullName = `${givenName} ${familyName}`;
+    const fullName = [givenName, middleName, familyName]
+      .filter((name) => !!name)
+      .join(' ');
     const image = hasThumbnail ? {uri: thumbnailPath} : undefined;
     const initials = getInitials(fullName);
     const selectedNumber = phoneNumbers.length ? phoneNumbers[0].number : null;
 
     return (
-      <TouchableOpacity onPress={() => onItemPress(selectedNumber)}>
+      <TouchableOpacity onPress={() => onItemPress(selectedNumber, contact)}>
         <View style={container}>
           <ProfilePicture {...{image, initials}} />
           <View>

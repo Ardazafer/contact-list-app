@@ -3,10 +3,11 @@ import {useSelector} from 'react-redux';
 import useContactLoader from '../../utils/useContactLoader';
 import Icon from 'react-native-vector-icons/AntDesign';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import {Text} from 'react-native';
+import {View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Colors from '../../constants/Colors';
 import styles from './styles';
+import RenderSelectedNumber from './RenderSelectedNumber';
 
 const ContactBook = () => {
   const selectedNumber = useSelector((state) => state.selectedNumber);
@@ -30,8 +31,18 @@ const ContactBook = () => {
   };
 
   return (
-    <>
-      <Icon name="contacts" size={80} color={Colors.mainColor} />
+    <View
+      style={{
+        height: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Icon
+        name="contacts"
+        size={80}
+        color={Colors.mainColor}
+        style={{margin: 10}}
+      />
       <CustomButton
         style={styles.contactButton}
         title={buttonTitle}
@@ -39,12 +50,8 @@ const ContactBook = () => {
         onPress={onContactButtonPressed}
       />
       {selectedNumber && <RenderSelectedNumber {...{selectedNumber}} />}
-    </>
+    </View>
   );
 };
 
 export default ContactBook;
-
-const RenderSelectedNumber = ({selectedNumber}) => {
-  return <Text>{`Selected number is: ${selectedNumber}`}</Text>;
-};

@@ -1,13 +1,12 @@
 import React from 'react';
-import {View} from 'react-native';
 import ContactBook from '../../components/ContactBook/ContactBook';
-import styles from './styles.js';
+import Screen from './Screen';
 
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
+    <Screen>
       <ContactBook />
-    </View>
+    </Screen>
   );
 };
 
