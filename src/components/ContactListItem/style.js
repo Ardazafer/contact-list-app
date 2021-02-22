@@ -10,12 +10,4 @@ export default StyleSheet.create({
   numberText: {
     color: 'rgba(0,0,0,0.5)',
   },
-  imageStyle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    marginRight: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 });

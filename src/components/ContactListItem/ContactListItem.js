@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
 import styles from './style';
+import getInitials from '../../utils/getInitials';
+import ProfilePicture from '../ProfilePicture';
 
 export default class ContactListItem extends React.PureComponent {
   render() {
@@ -12,14 +14,15 @@ export default class ContactListItem extends React.PureComponent {
       hasThumbnail,
       thumbnailPath,
     } = contact;
-    const {container, numberText, imageStyle} = styles;
+    const {container, numberText} = styles;
 
     const fullName = `${givenName} ${familyName}`;
     const image = hasThumbnail ? {uri: thumbnailPath} : undefined;
+    const initials = getInitials(fullName);
 
     return (
       <View style={container}>
-        {image && <Image source={image} style={imageStyle} />}
+        <ProfilePicture {...{image, initials}} />
         <View>
           <Text>{fullName}</Text>
           <RenderPhoneNumbers {...{phoneNumbers}} style={numberText} />
