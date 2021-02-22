@@ -5,7 +5,8 @@ import styles from './styles';
 const ContactListHeader = ({contactCount}) => {
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>{`${contactCount} contacts`}</Text>
+      <Text style={styles.headerText}>Phone</Text>
+      <Text style={styles.headerSubText}>{`${contactCount} contacts`}</Text>
     </View>
   );
 };

@@ -31,12 +31,7 @@ const ContactBook = () => {
   };
 
   return (
-    <View
-      style={{
-        height: '50%',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <View style={styles.container}>
       <Icon
         name="contacts"
         size={80}

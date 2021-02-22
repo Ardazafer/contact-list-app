@@ -1,15 +1,16 @@
 import {StyleSheet} from 'react-native';
 import Colors from '../../constants/Colors';
 export default StyleSheet.create({
+  container: {
+    height: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   contactButton: {
     backgroundColor: Colors.mainColor,
   },
-  selectedNumberText: {color: '#fff'},
+  selectedNumberText: {color: Colors.disabledTextColor},
   selectedNumberContainer: {
-    borderRadius: 20,
     marginTop: 10,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    backgroundColor: Colors.disabledTextColor,
   },
 });
