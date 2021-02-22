@@ -1,15 +1,29 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import styles from './style';
 
-const ContactListItem = ({contact}) => {
-  const {givenName, familyName} = contact;
-  const fullName = `${givenName} ${familyName}`;
+export default class ContactListItem extends React.PureComponent {
+  render() {
+    const {contact} = this.props;
+    const {givenName, familyName, phoneNumbers} = contact;
+    const fullName = `${givenName} ${familyName}`;
+    const {container, numberText} = styles;
 
-  return (
-    <View>
-      <Text>{fullName}</Text>
-    </View>
-  );
-};
+    return (
+      <View style={container}>
+        <View>
+          <Text>{fullName}</Text>
+          <RenderPhoneNumbers {...{phoneNumbers}} style={numberText} />
+        </View>
+      </View>
+    );
+  }
+}
 
-export default ContactListItem;
+const RenderPhoneNumbers = ({phoneNumbers, style}) =>
+  phoneNumbers.map((number, index) => {
+    const numberText = `${number.label}: ${number.number}`;
+    const key = number + index;
+
+    return <Text {...{key, style}}>{numberText}</Text>;
+  });
