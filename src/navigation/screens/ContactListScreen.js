@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, FlatList, Text} from 'react-native';
-import ContactListItem from '../components/ContactListItem/ContactListItem';
+import ContactListItem from '../../components/ContactListItem/ContactListItem';
 
 const ContactListScreen = ({route}) => {
   const {contacts} = route.params;

@@ -1,16 +1,25 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import styles from './style';
 
 export default class ContactListItem extends React.PureComponent {
   render() {
     const {contact} = this.props;
-    const {givenName, familyName, phoneNumbers} = contact;
+    const {
+      givenName,
+      familyName,
+      phoneNumbers,
+      hasThumbnail,
+      thumbnailPath,
+    } = contact;
+    const {container, numberText, imageStyle} = styles;
+
     const fullName = `${givenName} ${familyName}`;
-    const {container, numberText} = styles;
+    const image = hasThumbnail ? {uri: thumbnailPath} : undefined;
 
     return (
       <View style={container}>
+        {image && <Image source={image} style={imageStyle} />}
         <View>
           <Text>{fullName}</Text>
           <RenderPhoneNumbers {...{phoneNumbers}} style={numberText} />
