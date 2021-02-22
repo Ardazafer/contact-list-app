@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {View, Button, Text} from 'react-native';
-import {PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
 import {useSelector} from 'react-redux';
+import requestContactPermission from '../../utils/requestContactPermission';
 
 const HomeScreen = ({navigation}) => {
   const [contacts, setContacts] = useState([]);
@@ -16,14 +16,7 @@ const HomeScreen = ({navigation}) => {
 
   const requestPermissionAndGetContacts = (shouldNavigateToContactList) => {
     if (Platform.OS === 'android') {
-      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
-        title: 'Contact List App Contact Permission',
-        message:
-          'Contact List App needs access to your contacts ' +
-          'so you can use this app properly.',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
-      }).then((granted) => {
+      requestContactPermission().then((granted) => {
         if (granted === 'granted') {
           loadContacts(shouldNavigateToContactList);
           setIsPermissionGranted(true);
