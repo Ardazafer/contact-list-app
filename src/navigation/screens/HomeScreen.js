@@ -3,9 +3,10 @@ import {View, Button} from 'react-native';
 import {PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
 
-export default function HomeScreen() {
+const HomeScreen = ({navigation}) => {
   const [contacts, setContacts] = useState([]);
   const [isPermissionGranted, setIsPermissionGranted] = useState(false);
+  const {navigate} = navigation;
 
   const requestPermissionAndGetContacts = () => {
     if (Platform.OS === 'android') {
@@ -38,9 +39,19 @@ export default function HomeScreen() {
     requestPermissionAndGetContacts();
   }, []);
 
+  const onContactButtonPressed = () => {
+    !isPermissionGranted
+      ? requestPermissionAndGetContacts()
+      : navigate('ContactList', {contacts});
+  };
+
   return (
     <View>
-      <Button title="Open Contact List" onPress={() => {}}></Button>
+      <Button
+        title="Open Contact List"
+        onPress={onContactButtonPressed}></Button>
     </View>
   );
-}
+};
+
+export default HomeScreen;
