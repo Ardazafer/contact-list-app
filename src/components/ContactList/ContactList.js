@@ -2,7 +2,7 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-import ContactListItem from '../../components/ContactListItem';
+import ContactListItem from './ContactListItem';
 import {SELECT_CONTACT} from '../../redux/ContactReducer';
 import ContactListHeader from './ContactListHeader';
 import styles from './styles';

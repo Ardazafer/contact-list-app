@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, TouchableHighlight} from 'react-native';
+import {View, Text, TouchableHighlight} from 'react-native';
 import styles from './styles';
 import getInitials from '../../utils/getInitials';
 import ProfilePicture from '../ProfilePicture';
@@ -15,7 +15,7 @@ export default class ContactListItem extends React.PureComponent {
       hasThumbnail,
       thumbnailPath,
     } = contact;
-    const {container, numberText, firstItemStyle} = styles;
+    const {contactListItemContainer, numberText, firstItemStyle} = styles;
 
     const fullName = [givenName, middleName, familyName]
       .filter((name) => !!name)
@@ -24,13 +24,15 @@ export default class ContactListItem extends React.PureComponent {
     const initials = getInitials(fullName);
     const selectedNumber = phoneNumbers.length ? phoneNumbers[0].number : null;
     const containerStyle =
-      index === 0 ? [container, firstItemStyle] : container;
+      index === 0
+        ? [contactListItemContainer, firstItemStyle]
+        : contactListItemContainer;
 
     return (
       <TouchableHighlight
         style={containerStyle}
         onPress={() => onItemPress(selectedNumber, contact)}>
-        <View style={container}>
+        <View style={contactListItemContainer}>
           <View style={styles.profilePictureContainer}>
             <ProfilePicture {...{image, initials}} />
           </View>
