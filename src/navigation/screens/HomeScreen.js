@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button} from 'react-native';
 
 export default function HomeScreen() {
   return (
     <View>
-      <Text>Home Screen</Text>
+      <Button title="Open Contact List" onPress={() => {}}></Button>
     </View>
   );
 }
