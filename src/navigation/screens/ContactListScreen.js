@@ -1,11 +1,24 @@
 import React from 'react';
 import {View, FlatList, Text} from 'react-native';
-import ContactListItem from '../../components/ContactListItem/ContactListItem';
+import {useDispatch} from 'react-redux';
+import ContactListItem from '../../components/ContactListItem';
+import {SELECT_CONTACT} from '../../redux/ContactReducer';
 
-const ContactListScreen = ({route}) => {
+const ContactListScreen = ({navigation, route}) => {
   const {contacts} = route.params;
+  const dispatch = useDispatch();
 
-  const renderContacts = ({item}) => <ContactListItem contact={item} />;
+  const selectNumber = (number) =>
+    dispatch({type: SELECT_CONTACT, payload: number});
+
+  const handleSelectContact = (number) => {
+    selectNumber(number);
+    navigation.goBack();
+  };
+
+  const renderContacts = ({item}) => (
+    <ContactListItem contact={item} onItemPress={handleSelectContact} />
+  );
 
   return (
     <View>
