@@ -1,14 +1,20 @@
 import React, {useState, useEffect} from 'react';
-import {View, Button} from 'react-native';
+import {View, Button, Text} from 'react-native';
 import {PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
+import {useSelector} from 'react-redux';
 
 const HomeScreen = ({navigation}) => {
   const [contacts, setContacts] = useState([]);
-  const [isPermissionGranted, setIsPermissionGranted] = useState(false);
+  const [isPermissionGranted, setIsPermissionGranted] = useState(true);
+  const selectedNumber = useSelector((state) => state.selectedNumber);
+  const disableButtonCondition = !contacts.length && isPermissionGranted;
+  const buttonTitle = disableButtonCondition
+    ? 'Getting contact information'
+    : 'Open Contact List';
   const {navigate} = navigation;
 
-  const requestPermissionAndGetContacts = () => {
+  const requestPermissionAndGetContacts = (shouldNavigateToContactList) => {
     if (Platform.OS === 'android') {
       PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
         title: 'Contact List App Contact Permission',
@@ -19,20 +25,23 @@ const HomeScreen = ({navigation}) => {
         buttonPositive: 'OK',
       }).then((granted) => {
         if (granted === 'granted') {
-          loadContacts();
+          loadContacts(shouldNavigateToContactList);
           setIsPermissionGranted(true);
         } else {
           setIsPermissionGranted(false);
         }
       });
     } else {
-      loadContacts();
+      loadContacts(shouldNavigateToContactList);
     }
   };
 
-  const loadContacts = async () => {
+  const loadContacts = async (shouldNavigateToContactList) => {
     const _contacts = await Contacts.getAll();
+    _contacts.sort((a, b) => (a.givenName < b.givenName ? -1 : 1));
     setContacts(_contacts);
+    shouldNavigateToContactList &&
+      navigate('ContactList', {contacts: _contacts});
   };
 
   useEffect(() => {
@@ -41,17 +50,24 @@ const HomeScreen = ({navigation}) => {
 
   const onContactButtonPressed = () => {
     !isPermissionGranted
-      ? requestPermissionAndGetContacts()
+      ? requestPermissionAndGetContacts(true)
       : navigate('ContactList', {contacts});
   };
 
   return (
     <View>
       <Button
-        title="Open Contact List"
-        onPress={onContactButtonPressed}></Button>
+        title={buttonTitle}
+        disabled={disableButtonCondition}
+        onPress={onContactButtonPressed}
+      />
+      {selectedNumber && <RenderSelectedNumber {...{selectedNumber}} />}
     </View>
   );
 };
 
 export default HomeScreen;
+
+const RenderSelectedNumber = ({selectedNumber}) => {
+  return <Text>{`Selected number is: ${selectedNumber}`}</Text>;
+};
