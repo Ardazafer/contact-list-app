@@ -50,9 +50,13 @@ const HomeScreen = ({navigation}) => {
   return (
     <View>
       <Button title="Open Contact List" onPress={onContactButtonPressed} />
-      <Text>{`Selected number: ${selectedNumber}`}</Text>
+      {selectedNumber && <RenderSelectedNumber {...{selectedNumber}} />}
     </View>
   );
 };
 
 export default HomeScreen;
+
+const RenderSelectedNumber = ({selectedNumber}) => {
+  return <Text>{`Selected number is: ${selectedNumber}`}</Text>;
+};
